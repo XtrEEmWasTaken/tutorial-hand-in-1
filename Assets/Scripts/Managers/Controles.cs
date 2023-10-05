@@ -31,7 +31,7 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                     ""name"": ""Movement"",
                     ""type"": ""PassThrough"",
                     ""id"": ""91d57cd5-dc05-4a77-ba4d-33546467df29"",
-                    ""expectedControlType"": ""Vector3"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -46,7 +46,7 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""New action"",
+                    ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""15b6aac1-9b99-41ed-a9d8-15557062e47b"",
                     ""expectedControlType"": ""Button"",
@@ -70,7 +70,7 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""WASD"",
                     ""id"": ""fb8c8379-2e93-43d5-80a7-d6208582e298"",
-                    ""path"": ""3DVector"",
+                    ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -80,8 +80,8 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Up"",
-                    ""id"": ""65c0461f-70dc-4466-a607-24697bdb2d1f"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""id"": ""408e01a2-5124-43ba-b000-0b8913cc5070"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -91,8 +91,8 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Down"",
-                    ""id"": ""3a516411-acd8-469d-80ae-4cd1e9714517"",
-                    ""path"": ""<Keyboard>/shift"",
+                    ""id"": ""159bce5a-2c2f-42b8-bf1f-6d6181f789ee"",
+                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -102,7 +102,7 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Left"",
-                    ""id"": ""408e01a2-5124-43ba-b000-0b8913cc5070"",
+                    ""id"": ""618163e1-8096-41e4-84a6-dacd6cd2b61a"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -113,30 +113,8 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Right"",
-                    ""id"": ""159bce5a-2c2f-42b8-bf1f-6d6181f789ee"",
+                    ""id"": ""f3896386-74ce-4400-b3f8-971d694e0aa9"",
                     ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Forward"",
-                    ""id"": ""35e9f1dd-11e2-45fb-ae02-2348ffd2627e"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Backward"",
-                    ""id"": ""ecbecab9-2456-47e3-9d8d-feadd655f3b1"",
-                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -158,11 +136,11 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""6ef4dc0c-e734-4e5b-a94f-f3be646f1445"",
-                    ""path"": """",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""New action"",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -231,7 +209,7 @@ public partial class @Controles: IInputActionCollection2, IDisposable
         m_Game = asset.FindActionMap("Game", throwIfNotFound: true);
         m_Game_Movement = m_Game.FindAction("Movement", throwIfNotFound: true);
         m_Game_Shoot = m_Game.FindAction("Shoot", throwIfNotFound: true);
-        m_Game_Newaction = m_Game.FindAction("New action", throwIfNotFound: true);
+        m_Game_Jump = m_Game.FindAction("Jump", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Newaction = m_UI.FindAction("New action", throwIfNotFound: true);
@@ -301,14 +279,14 @@ public partial class @Controles: IInputActionCollection2, IDisposable
     private List<IGameActions> m_GameActionsCallbackInterfaces = new List<IGameActions>();
     private readonly InputAction m_Game_Movement;
     private readonly InputAction m_Game_Shoot;
-    private readonly InputAction m_Game_Newaction;
+    private readonly InputAction m_Game_Jump;
     public struct GameActions
     {
         private @Controles m_Wrapper;
         public GameActions(@Controles wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Game_Movement;
         public InputAction @Shoot => m_Wrapper.m_Game_Shoot;
-        public InputAction @Newaction => m_Wrapper.m_Game_Newaction;
+        public InputAction @Jump => m_Wrapper.m_Game_Jump;
         public InputActionMap Get() { return m_Wrapper.m_Game; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -324,9 +302,9 @@ public partial class @Controles: IInputActionCollection2, IDisposable
             @Shoot.started += instance.OnShoot;
             @Shoot.performed += instance.OnShoot;
             @Shoot.canceled += instance.OnShoot;
-            @Newaction.started += instance.OnNewaction;
-            @Newaction.performed += instance.OnNewaction;
-            @Newaction.canceled += instance.OnNewaction;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
         }
 
         private void UnregisterCallbacks(IGameActions instance)
@@ -337,9 +315,9 @@ public partial class @Controles: IInputActionCollection2, IDisposable
             @Shoot.started -= instance.OnShoot;
             @Shoot.performed -= instance.OnShoot;
             @Shoot.canceled -= instance.OnShoot;
-            @Newaction.started -= instance.OnNewaction;
-            @Newaction.performed -= instance.OnNewaction;
-            @Newaction.canceled -= instance.OnNewaction;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
         }
 
         public void RemoveCallbacks(IGameActions instance)
@@ -453,7 +431,7 @@ public partial class @Controles: IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
